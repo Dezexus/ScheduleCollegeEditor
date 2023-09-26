@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="ScheduleCollegeEditor.View.TimeLesson"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScheduleCollegeEditor.View"
+             Margin="2"
+             >
+
+    <Grid Height="35">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding TimeLesson.LessonNumber}" Grid.Column="0" Style="{DynamicResource TextBoxBase}" Margin="1,0" Tag="0"/>
+        <TextBox Text="{Binding TimeLesson.Range}" Grid.Column="1" Style="{DynamicResource TextBoxBase}" Margin="1,0" Tag="00:00-00:00"/>
+        <CheckBox Grid.Column="2" IsChecked="{Binding ToDelete}" Style="{DynamicResource CheckBoxDelete}" Margin="1,0" ToolTip="Поставить на удаление"/>
+    </Grid>
+    
+</UserControl>

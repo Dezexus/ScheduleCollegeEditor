@@ -1,0 +1,44 @@
+﻿<Window x:Class="ScheduleCollegeEditor.View.TemplateScheduleCallsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScheduleCollegeEditor.View" 
+        xmlns:viewmode="clr-namespace:ScheduleCollegeEditor.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        x:Name="Window"
+        Background="{DynamicResource Window.Static.Background}"
+        WindowStartupLocation="CenterOwner"
+        Height="450" 
+        Width="400"
+        MinHeight="350" 
+        MinWidth="370"
+        >
+
+    <Window.DataContext>
+        <viewmode:TemplateScheduleCallsViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ListBox HorizontalContentAlignment="Center" ItemsSource="{Binding TemplateSheduleCallsList}" Style="{DynamicResource ListBoxBase}" ItemContainerStyle="{DynamicResource ItemsStyle}" Margin="10" 
+                 SelectedValue="{Binding SelectedTemplateSheduleCalls}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <command:EventToCommand Command="{Binding ApplyTemplateCommand}"  CommandParameter="{Binding ElementName=Window}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Height="30" Margin="0,10">
+            <Button Content="Удалить" Width="150" Style="{DynamicResource ButtonBase}" Margin="15,0" Command="{Binding DeleteTemplateCommand}"/>
+            <Button Content="Применить" Width="150" Style="{DynamicResource ButtonBase}" Margin="15,0" Command="{Binding ApplyTemplateCommand}" CommandParameter="{Binding ElementName=Window}"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

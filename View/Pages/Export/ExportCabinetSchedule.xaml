@@ -1,0 +1,82 @@
+﻿<Page x:Class="ScheduleCollegeEditor.View.ExportCabinetSchedule"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ScheduleCollegeEditor.View"
+      xmlns:viewmodel="clr-namespace:ScheduleCollegeEditor.ViewModel" 
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+      xmlns:command="http://www.galasoft.ch/mvvmlight"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Stretch"
+      >
+
+    <Page.DataContext>
+        <viewmodel:ExportCabinetScheduleViewModel/>
+    </Page.DataContext>
+
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </Page.Resources>
+
+    <Grid HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox
+            Grid.Column="1"
+            VerticalAlignment="Stretch" 
+            MinWidth="350"
+            Margin="10" FontSize="15" 
+            Style="{DynamicResource ListBoxBase}" 
+            ItemContainerStyle="{DynamicResource ItemsStyle}"
+            SelectedItem="{Binding SelectedCabinetInCabinets}"
+            ItemsSource="{Binding Cabinets}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <command:EventToCommand Command="{Binding AddCabinetInSelectedCabinetsCommand}" CommandParameter="{Binding SelectedCabinetInCabinets}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+
+        <ListBox 
+            Grid.Column="3"
+            VerticalAlignment="Stretch" 
+            MinWidth="350"
+            Margin="10" FontSize="15" 
+            Style="{DynamicResource ListBoxBase}"
+            ItemContainerStyle="{DynamicResource ItemsStyle}"
+            SelectedItem="{Binding SelectedCabinetInSelectedCabinets}"
+            ItemsSource="{Binding SelectedCabinets}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <command:EventToCommand Command="{Binding RemoveCabinetFromSelectedCabinetsCommand}" CommandParameter="{Binding SelectedCabinetInSelectedCabinets}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+        <Frame Grid.Column="4" Content="{Binding LoadingAnimation}" Visibility="{Binding Path=LoadAnimationVisible, Converter={StaticResource BoolToVisConverter}}" Width="35" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10"/>
+
+        <StackPanel Orientation="Vertical" Grid.Column="2" Width="35" VerticalAlignment="Center">
+            <Button Content="{StaticResource DoubleArrowRight}" Height="35" Style="{DynamicResource ButtonBase}" Margin="0,5" Command="{Binding AddAllCabinetInSelectedCabinetsCommand}"/>
+            <Button Content="{StaticResource ArrowRight}" Height="35" Style="{DynamicResource ButtonBase}" Margin="0,5" Command="{Binding AddCabinetInSelectedCabinetsCommand}" CommandParameter="{Binding SelectedCabinetInCabinets}"/>
+            <Button Content="{StaticResource ArrowLeft}" Height="35" Style="{DynamicResource ButtonBase}" Margin="0,5" Command="{Binding RemoveCabinetFromSelectedCabinetsCommand}" CommandParameter="{Binding SelectedCabinetInSelectedCabinets}"/>
+            <Button Content="{StaticResource DoubleArrowLeft}" Height="35" Style="{DynamicResource ButtonBase}" Margin="0,5" Command="{Binding RemoveAllCabinetFromSelectedCabinetsCommand}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="5" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Открыть расписание" Width="200" Margin="10,0" Style="{DynamicResource ButtonBase}" Command="{Binding OpenCabinetScheduleCommand}"/>
+            <Button Content="Экспорт в Excel" Width="200" Margin="10,0" Style="{DynamicResource ButtonBase}" Command="{Binding ExportCabinetScheduleInExcelCommand}"/>
+        </StackPanel>
+    </Grid>
+    
+</Page>

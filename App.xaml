@@ -1,0 +1,30 @@
+<Application x:Class="ScheduleCollegeEditor.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:local="clr-namespace:ScheduleCollegeEditor"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             StartupUri="View\Windows\MainWindow.xaml" 
+             d1p1:Ignorable="d">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Light/RegionBase.xaml"/>
+                <ResourceDictionary Source="Themes/Light/Color.xaml"/>
+                <ResourceDictionary Source="Themes/Light/ComboBoxBase.xaml"/>
+                <ResourceDictionary Source="Themes/Light/TextBoxBase.xaml"/>
+                <ResourceDictionary Source="Themes/Light/ListBoxBase.xaml"/>
+                <ResourceDictionary Source="Themes/Light/Button.xaml"/>
+                <ResourceDictionary Source="Themes/Light/CheckBoxDelete.xaml"/>
+                <ResourceDictionary Source="Themes/Light/ScrollViewer.xaml"/>
+                <ResourceDictionary Source="Themes/Light/ToolTip.xaml"/>
+                <ResourceDictionary Source="Themes/General/ComboBoxSchedule.xaml"/>
+                <ResourceDictionary Source="Themes/General/IconButton.xaml"/>
+                <ResourceDictionary Source="Themes/General/CheckBoxSchedule.xaml"/>
+                <ResourceDictionary Source="Themes/General/CheckBoxScheduleDelete.xaml"/>
+                <ResourceDictionary Source="Themes/General/LessonCardTextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/General/Button.xaml"/>
+                <ResourceDictionary Source="Resource/vectorIcons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

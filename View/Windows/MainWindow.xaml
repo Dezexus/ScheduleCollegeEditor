@@ -1,0 +1,77 @@
+﻿<Window x:Class="ScheduleCollegeEditor.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScheduleCollegeEditor"
+        xmlns:viewmodel="clr-namespace:ScheduleCollegeEditor.ViewModel" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        x:Name="Window"
+        Title="Редактор расписания БиП"
+        MinHeight="500" 
+        MinWidth="900"
+        Height="620" 
+        Width="800"
+        Background="{DynamicResource Window.Static.Background}"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel/>
+    </Window.DataContext>
+
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <command:EventToCommand Command="{Binding ClosedAppCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding LoadedAppCommand}" CommandParameter="{Binding ElementName=Window}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Margin="10" CornerRadius="10" Background="{DynamicResource Panel.Static.Background}" BorderThickness="1" BorderBrush="{DynamicResource Border.Static.Brush}">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.1" ShadowDepth="3" BlurRadius="2"/>
+            </Border.Effect>
+            <Grid Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Button Content="{StaticResource Settings}" HorizontalAlignment="Right" Margin="10,0" Height="30" Width="30" Style="{StaticResource IconButton}" Command="{Binding OpenSettingPageCommand}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="35" >
+                    <Button Content="Словари" Width="150" Style="{DynamicResource ButtonBase}" Command="{Binding OpenDictionariesPageCommand}"/>
+                    <Button Content="Расписание группы" Width="150" Margin="10,0" Style="{DynamicResource ButtonBase}" Command="{Binding OpenFillGroupSchedulePageCommand}"/>
+                    <Button Content="Экспорт" Width="150" Style="{DynamicResource ButtonBase}" Command="{Binding OpenExportGroupSchedulePageCommand}"/>
+                </StackPanel>
+
+                <Frame Grid.Row="1" Content="{Binding SecondaryMenu}" NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </Border>
+
+        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" Content="{Binding SelectedDictionaryPage}"/>
+
+        <Border Background="{DynamicResource Notifi.Background}" BorderBrush="{Binding NotificationBorderBrush}" BorderThickness="2" Grid.Row="1" MinWidth="300" Width="auto" Height="40"  Margin="20" Visibility="{Binding Path=NotificationVisible, Converter={StaticResource BoolToVisConverter}}" 
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{DynamicResource BorderBase}">
+            <TextBlock Text="{Binding NotificationText}" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0"
+                       Foreground="{DynamicResource TextBlock.Static.Foreground}"/>
+        </Border>
+
+    </Grid>
+
+</Window>
